@@ -1,0 +1,49 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Creative Weather App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+
+    <div class="container">
+        <div class="weather-card">
+            <h1>Weather App</h1>
+
+            <form method="POST">
+                <div class="search-box">
+                    <input type="text" name="city" placeholder="Enter City Name" required>
+                    <button type="submit">Search</button>
+                </div>
+            </form>
+
+            <!-- THIS IS THE KEY PART - Only show if data exists -->
+            {% if data %}
+            <div class="weather-content">
+                <img src="https://cdn-icons-png.flaticon.com/512/869/869869.png" alt="Weather Icon">
+                <h2>{{ data["name"] }}</h2>
+                <h1 class="temp">{{ data["main"]["temp"] }}°C</h1>
+                <p class="desc">{{ data["weather"][0]["description"] }}</p>
+                
+                <div class="details">
+                    <div class="box">
+                        <h3>Humidity</h3>
+                        <p>{{ data["main"]["humidity"] }}%</p>
+                    </div>
+                    <div class="box">
+                        <h3>Wind</h3>
+                        <p>{{ data["wind"]["speed"] }} km/h</p>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            <!-- END OF KEY PART -->
+
+        </div>
+    </div>
+</body>
+</html>
